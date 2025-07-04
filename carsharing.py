@@ -18,6 +18,10 @@ async def welcome(name):
     """Return a friendly welcome message"""
     return {"message":f"Welcome, {name} to the Car Sharing API"}
 
+
 @app.get("/api/cars")
-def get_cars():
-    return db
+def get_cars(size=None):
+    if size:
+        return [car for car in db if car["size"] == size]
+    else:
+        return db
