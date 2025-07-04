@@ -33,3 +33,6 @@ def get_cars(size: str|None = None, doors: int|None = None) -> list[dict]:
 def car_by_id(id: int) -> dict:
     result = [car for car in db if car["id"] == id]
     return result[0] if result else {"error": "Car not found"}
+
+if __name__ == "__main__":
+    uvicorn.run("carsharing:app", host="127.0.0.1", port=8000, reload=True)
