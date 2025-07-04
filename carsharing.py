@@ -20,8 +20,10 @@ async def welcome(name):
 
 
 @app.get("/api/cars")
-def get_cars(size=None):
+def get_cars(size: str|None = None, doors: int|None = None) -> list[dict]:
+    result = db
     if size:
-        return [car for car in db if car["size"] == size]
-    else:
-        return db
+        result = [car for car in result if car["size"] == size]
+    if doors:
+        result = [car for car in result if car["doors"] >= doors]
+    return result
